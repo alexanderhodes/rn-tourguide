@@ -13,6 +13,7 @@ import {
 import { BorderRadiusObject, IStep, Labels, ValueXY } from '../types'
 import styles, { MARGIN } from './style'
 import { SvgMask } from './SvgMask'
+import { SvgOpacity } from './SvgOpacity'
 import { Tooltip, TooltipProps } from './Tooltip'
 
 declare var __TEST__: boolean
@@ -332,6 +333,15 @@ export class Modal extends React.Component<ModalProps, State> {
     )
   }
 
+  renderMarkedOpacity = () => (
+    <SvgOpacity
+      size={this.state.size!}
+      position={this.state.position!}
+      currentStep={this.props.currentStep}
+      borderRadius={this.props.borderRadius}
+    />
+  )
+
   render() {
     const containerVisible = this.state.containerVisible || this.props.visible
     const contentVisible = this.state.layout && containerVisible
@@ -353,6 +363,7 @@ export class Modal extends React.Component<ModalProps, State> {
               {this.renderMask()}
               {this.renderTooltip()}
               {this.renderSkipComponent()}
+              {this.renderMarkedOpacity()}
             </>
           )}
         </View>
