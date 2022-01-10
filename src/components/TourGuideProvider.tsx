@@ -95,9 +95,9 @@ export const TourGuideProvider = ({
   }, [mounted, steps])
 
   const moveToCurrentStep = async () => {
-    if (scrollView?.current) {
+    if (scrollView?.current && currentStep?.wrapper && findNodeHandle(scrollView.current)) {
       // scrolling
-      await currentStep?.wrapper?.measureLayout(
+      await currentStep.wrapper.measureLayout(
         findNodeHandle(scrollView.current),
         (_x: any, y: number, _w: any, h: number) => {
           const offsetY = y > 0 ? y - h / 2 : 0
