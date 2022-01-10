@@ -56,9 +56,7 @@ export const TourGuideProvider = ({
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
-  const [scrollView, updateScrollView] = useState<
-    React.RefObject<any> | undefined
-  >()
+  const [scrollView, updateScrollView] = useState<React.RefObject<any> | null>(null)
   const [steps, setSteps] = useState<Steps>({})
   const [canStart, setCanStart] = useState<boolean>(false)
 
@@ -185,11 +183,11 @@ export const TourGuideProvider = ({
 
   const getCurrentStep = () => currentStep
 
-  const setScrollView = (scrollView?: React.RefObject<any>) => updateScrollView(scrollView)
+  const setScrollView = (scrollView: React.RefObject<any> | null) => updateScrollView(scrollView ? scrollView : null)
 
   const start = async (fromStep?: number) => {
     if (!scrollView) {
-      setScrollView(undefined)
+      setScrollView(null)
     }
 
     const currentStep = fromStep

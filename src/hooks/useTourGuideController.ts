@@ -13,7 +13,11 @@ export const useTourGuideController = (scrollView?: React.RefObject<any> | undef
 
   React.useEffect(() => {
     if (setScrollView) {
-      setScrollView(scrollView)
+      if (scrollView) {
+        setScrollView(scrollView)  
+      } else {
+        setScrollView(null)
+      }
     }
   }, [scrollView])
 
