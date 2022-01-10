@@ -250,3 +250,36 @@ export const svgMaskPathMorph = ({
     clamp(animation._value, 0, 1),
   )}`
 }
+
+export const svgCirclePath = (x: number, y: number, radius: number) => {
+  let l = x - radius + "," + y,
+    r = x + radius + "," + y,
+    pre = "A" + radius + "," + radius + ",0,1,1,";
+
+  return "M" + l + pre + r + pre + l + "Z";
+}
+
+export const svgRectPath = (x: number, y: number, width: number, height: number) => {
+    const r = x + width;
+    const b = y + height;
+
+    return (
+      "M" +
+      x +
+      "," +
+      y +
+      "L" +
+      r +
+      "," +
+      y +
+      "L" +
+      r +
+      "," +
+      b +
+      "L" +
+      x +
+      "," +
+      b +
+      "Z"
+    );
+}
