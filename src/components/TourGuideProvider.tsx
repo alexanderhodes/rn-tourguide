@@ -1,6 +1,12 @@
 import mitt from 'mitt'
 import * as React from 'react'
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
+import {
+  findNodeHandle,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native'
 import { TourGuideContext } from '../components/TourGuideContext'
 import { useIsMounted } from '../hooks/useIsMounted'
 import { IStep, Labels, StepObject, Steps } from '../types'
@@ -50,6 +56,9 @@ export const TourGuideProvider = ({
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
+  const [scrollView, updateScrollView] = useState<
+    React.RefObject<any> | undefined
+  >()
   const [steps, setSteps] = useState<Steps>({})
   const [canStart, setCanStart] = useState<boolean>(false)
 
@@ -86,21 +95,37 @@ export const TourGuideProvider = ({
   }, [mounted, steps])
 
   const moveToCurrentStep = async () => {
-    const size = await currentStep!.target.measure()
-    if (
-      isNaN(size.width) ||
-      isNaN(size.height) ||
-      isNaN(size.x) ||
-      isNaN(size.y)
-    ) {
-      return
+    if (scrollView?.current) {
+      // scrolling
+      await currentStep?.wrapper?.measureLayout(
+        findNodeHandle(scrollView.current),
+        (_x: any, y: number, _w: any, h: number) => {
+          const offsetY = y > 0 ? y - h / 2 : 0
+          scrollView.current.scrollTo({ y: offsetY, animated: false })
+        },
+      )
     }
-    await modal.current?.animateMove({
-      width: size.width + OFFSET_WIDTH,
-      height: size.height + OFFSET_WIDTH,
-      left: Math.round(size.x) - OFFSET_WIDTH / 2,
-      top: Math.round(size.y) - OFFSET_WIDTH / 2 + (verticalOffset || 0),
-    })
+
+    setTimeout(
+      async () => {
+        const size = await currentStep!.target.measure()
+        if (
+          isNaN(size.width) ||
+          isNaN(size.height) ||
+          isNaN(size.x) ||
+          isNaN(size.y)
+        ) {
+          return
+        }
+        await modal.current?.animateMove({
+          width: size.width + OFFSET_WIDTH,
+          height: size.height + OFFSET_WIDTH,
+          left: Math.round(size.x) - OFFSET_WIDTH / 2,
+          top: Math.round(size.y) - OFFSET_WIDTH / 2 + (verticalOffset || 0),
+        })
+      },
+      scrollView ? 100 : 0,
+    )
   }
 
   const setCurrentStep = (step?: IStep) =>
@@ -180,6 +205,9 @@ export const TourGuideProvider = ({
     }
   }
 
+  const setScrollView = (scrollView?: React.RefObject<any>) =>
+    updateScrollView(scrollView)
+
   return (
     <View style={[styles.container, wrapperStyle]}>
       <TourGuideContext.Provider
@@ -191,6 +219,7 @@ export const TourGuideProvider = ({
           start,
           stop,
           canStart,
+          setScrollView,
         }}
       >
         {children}
