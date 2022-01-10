@@ -319,6 +319,32 @@ List of available events is:
 - `stop` — Copilot tutorial has ended or skipped.
 - `stepChange` — Next step is triggered. Passes [`Step`](https://github.com/mohebifar/react-native-copilot/blob/master/src/types.js#L2) instance as event handler argument.
 
+### Handling with scroll view
+
+Scrolling is supported when passing a scroll view ref to `useTourGuideController` hook. 
+
+```tsx
+
+const App = () => {
+  // define ref for ScrollView
+  const scrollViewRef = useRef<ScrollView>(null)
+
+  const { start, canStart, stop, eventEmitter, setScrollView } = useTourGuideController()
+
+  useEffect(() => {
+    // pass the ref to the controller
+    setScrollView(scrollViewRef.current)
+  }, [scrollViewRef])
+
+  return (
+    <ScrollView ref={scrollViewRef}>
+      // ...
+    </ScrollView>
+  )
+}
+
+```
+
 ## Contributing
 
 Issues and Pull Requests are always welcome.
