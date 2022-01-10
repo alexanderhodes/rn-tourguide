@@ -7,6 +7,7 @@ interface Props {
   name: string
   order: number
   text: string
+  message?: string
   shape?: Shape
   active?: boolean
   maskOffset?: number
