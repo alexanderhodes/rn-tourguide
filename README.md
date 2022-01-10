@@ -327,14 +327,9 @@ Scrolling is supported when passing a scroll view ref to `useTourGuideController
 
 const App = () => {
   // define ref for ScrollView
-  const scrollViewRef = useRef<ScrollView>(null)
-
-  const { start, canStart, stop, eventEmitter, setScrollView } = useTourGuideController()
-
-  useEffect(() => {
-    // pass the ref to the controller
-    setScrollView(scrollViewRef.current)
-  }, [scrollViewRef])
+  const scrollViewRef = useRef<ScrollView>()
+  // pass the ref to useTourGuideController hook 
+  const { start, canStart, stop, eventEmitter } = useTourGuideController(scrollViewRef)
 
   return (
     <ScrollView ref={scrollViewRef}>
