@@ -202,6 +202,8 @@ export interface TourGuideProviderProps {
   animationDuration?: number
   children: React.ReactNode
   dismissOnPress?: boolean
+  // pressing items in background will be prevented
+  preventBackgroundActions?: boolean
 }
 
 interface TooltipProps {

@@ -33,6 +33,7 @@ export interface ModalProps {
   backdropColor: string
   labels: Labels
   dismissOnPress?: boolean
+  preventBackgroundActions: boolean
   easing(value: number): number
   stop(): void
   next(): void
@@ -322,7 +323,7 @@ export class Modal extends React.Component<ModalProps, State> {
         <View
           style={styles.container}
           onLayout={this.handleLayoutChange}
-          pointerEvents='box-none'
+          pointerEvents={this.props.preventBackgroundActions ? undefined : 'box-none'}
         >
           {contentVisible && (
             <>

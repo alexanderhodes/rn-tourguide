@@ -37,6 +37,10 @@ export interface TourGuideProviderProps {
   animationDuration?: number
   children: React.ReactNode
   dismissOnPress?: boolean
+  /**
+   * pressing items in background will be prevented - default: false
+   */
+  preventBackgroundActions?: boolean
 }
 
 export const TourGuideProvider = ({
@@ -53,6 +57,7 @@ export const TourGuideProvider = ({
   verticalOffset,
   startAtMount = false,
   dismissOnPress = false,
+  preventBackgroundActions = false,
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
@@ -239,6 +244,7 @@ export const TourGuideProvider = ({
             maskOffset,
             borderRadius,
             dismissOnPress,
+            preventBackgroundActions,
           }}
         />
       </TourGuideContext.Provider>
