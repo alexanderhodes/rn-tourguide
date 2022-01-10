@@ -40,6 +40,13 @@ export const Tooltip = ({
         {currentStep && currentStep.text}
       </Text>
     </View>
+    {currentStep && currentStep.message ? (
+      <View style={styles.tooltipContainer}>
+        <Text testID='stepText' style={styles.tooltipText}>
+          {currentStep.message}
+        </Text>
+      </View>
+    ) : null}
     <View style={[styles.bottomBar]}>
       {!isLastStep ? (
         <TouchableOpacity onPress={handleStop}>

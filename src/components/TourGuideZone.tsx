@@ -8,6 +8,7 @@ export interface TourGuideZoneProps {
   zone: number
   isTourGuide?: boolean
   text?: string
+  message?: string
   shape?: Shape
   maskOffset?: number
   borderRadius?: number
@@ -24,6 +25,7 @@ export const TourGuideZone = ({
   children,
   shape,
   text,
+  message,
   maskOffset,
   borderRadius,
   style,
@@ -38,6 +40,7 @@ export const TourGuideZone = ({
   return (
     <Step
       text={text ?? `Zone ${zone}`}
+      message={message}
       order={zone}
       name={`${zone}`}
       {...{

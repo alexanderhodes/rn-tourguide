@@ -178,6 +178,7 @@ interface TourGuideZoneProps {
   zone: number // A positive number indicating the order of the step in the entire walkthrough.
   isTourGuide?: boolean // return children without wrapping id false
   text?: string // text in tooltip
+  message?: string // text below the text prop in the tooltip
   shape?: Shape // which shape
   maskOffset?: number // offset around zone
   borderRadius?: number // round corner when rectangle
