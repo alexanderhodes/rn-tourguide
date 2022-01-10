@@ -205,6 +205,8 @@ export interface TourGuideProviderProps {
   dismissOnPress?: boolean
   // pressing items in background will be prevented
   preventBackgroundActions?: boolean
+  // absolute positioned component for skipping the product tour
+  skipComponent?: React.ComponentType<TooltipProps>
 }
 
 interface TooltipProps {
@@ -321,6 +323,27 @@ List of available events is:
 - `start` — Copilot tutorial has started.
 - `stop` — Copilot tutorial has ended or skipped.
 - `stepChange` — Next step is triggered. Passes [`Step`](https://github.com/mohebifar/react-native-copilot/blob/master/src/types.js#L2) instance as event handler argument.
+
+### Skip component
+
+You can integrate a skip component which is positioned absolute, to allow user doing some actions, like skipping the tour. It works the same like the tooltip component. So you can pass a component to the `copilot` HOC maker.
+
+```js
+const SkipComponent = ({
+  isFirstStep,
+  isLastStep,
+  handleNext,
+  handlePrev,
+  handleStop,
+  currentStep,
+}) => (
+  // ...
+);
+
+<TourGuideProvider {...{skipComponent: SkipComponent}}>
+// ...
+</TourGuideProvider>
+```
 
 ### Handling with scroll view
 

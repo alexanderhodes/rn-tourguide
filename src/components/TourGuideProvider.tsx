@@ -41,6 +41,10 @@ export interface TourGuideProviderProps {
    * pressing items in background will be prevented - default: false
    */
   preventBackgroundActions?: boolean
+  /**
+   * absolute positioned component for skipping the product tour
+   */
+  skipComponent?: React.ComponentType<TooltipProps>
 }
 
 export const TourGuideProvider = ({
@@ -58,6 +62,7 @@ export const TourGuideProvider = ({
   startAtMount = false,
   dismissOnPress = false,
   preventBackgroundActions = false,
+  skipComponent,
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
@@ -245,6 +250,7 @@ export const TourGuideProvider = ({
             borderRadius,
             dismissOnPress,
             preventBackgroundActions,
+            skipComponent,
           }}
         />
       </TourGuideContext.Provider>

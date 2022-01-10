@@ -38,6 +38,7 @@ export interface ModalProps {
   stop(): void
   next(): void
   prev(): void
+  skipComponent?: React.ComponentType<TooltipProps>
 }
 
 interface Layout {
@@ -309,6 +310,28 @@ export class Modal extends React.Component<ModalProps, State> {
     )
   }
 
+  renderSkipComponent() {
+    const { skipComponent: SkipComponent, visible } = this.props
+
+    if (!visible || !SkipComponent) {
+      return null
+    }
+
+    return (
+      <View style={styles.skipContainer}>
+        <SkipComponent
+          isFirstStep={this.props.isFirstStep}
+          isLastStep={this.props.isLastStep}
+          currentStep={this.props.currentStep!}
+          handleNext={this.handleNext}
+          handlePrev={this.handlePrev}
+          handleStop={this.handleStop}
+          labels={this.props.labels}
+        />
+      </View>
+    )
+  }
+
   render() {
     const containerVisible = this.state.containerVisible || this.props.visible
     const contentVisible = this.state.layout && containerVisible
@@ -329,6 +352,7 @@ export class Modal extends React.Component<ModalProps, State> {
             <>
               {this.renderMask()}
               {this.renderTooltip()}
+              {this.renderSkipComponent()}
             </>
           )}
         </View>

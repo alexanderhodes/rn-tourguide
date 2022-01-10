@@ -13,6 +13,7 @@ export interface IStyle {
   buttonText: TextStyle
   bottomBar: ViewStyle
   overlayContainer: ViewStyle
+  skipContainer: ViewStyle
 }
 
 export default StyleSheet.create<IStyle>({
@@ -62,4 +63,8 @@ export default StyleSheet.create<IStyle>({
     bottom: 0,
     right: 0,
   },
+  skipContainer: {
+    position: 'absolute',
+    width: "100%",
+  }
 })
