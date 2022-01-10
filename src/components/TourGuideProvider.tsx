@@ -186,10 +186,6 @@ export const TourGuideProvider = ({
   const setScrollView = (scrollView: React.RefObject<any> | null) => updateScrollView(scrollView ? scrollView : null)
 
   const start = async (fromStep?: number) => {
-    if (!scrollView) {
-      setScrollView(null)
-    }
-
     const currentStep = fromStep
       ? (steps as StepObject)[fromStep]
       : getFirstStep()
