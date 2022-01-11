@@ -18,6 +18,10 @@ export class MaskOpacity extends Component<Props, State> {
   }
 
   render() {
+    if (!this.props.currentStep) {
+      return null
+    }
+ 
     const { position, size, currentStep } = this.props
     const shape = currentStep!.shape
 
