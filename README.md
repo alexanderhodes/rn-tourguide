@@ -185,6 +185,7 @@ interface TourGuideZoneProps {
   startAtMount?: boolean //  start at mount
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
+  onPress?: () => void // method that will be fired when clicking on the zone
   children: React.ReactNode
 }
 
