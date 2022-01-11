@@ -8,6 +8,9 @@ interface Props {
   position: ValueXY
   borderRadius?: number
   currentStep?: IStep
+  isLastStep?: boolean
+  handleNext?(): void
+  handleStop?(): void
 }
 
 interface State {}
@@ -22,7 +25,7 @@ export class MaskOpacity extends Component<Props, State> {
       return null
     }
  
-    const { position, size, currentStep } = this.props
+    const { position, size, currentStep, handleNext, isLastStep, handleStop } = this.props
     const shape = currentStep!.shape
 
     const left = position.x
@@ -32,7 +35,16 @@ export class MaskOpacity extends Component<Props, State> {
     const borderRadius = shape === "circle" ? height / 2 : this.props.borderRadius
 
     return (
-      <TouchableWithoutFeedback style={style.maskOpacityContainer} onPress={currentStep?.onPress}>
+      <TouchableWithoutFeedback style={style.maskOpacityContainer} onPress={() => {
+        if (currentStep.onPress) {
+          currentStep.onPress()
+        }
+        if (isLastStep === true && handleStop) {
+          handleStop()
+        } else if (handleNext) {
+          handleNext()
+        }
+      }}>
         <View style={{ height, width, top, left, borderRadius}} />
       </TouchableWithoutFeedback>
     )

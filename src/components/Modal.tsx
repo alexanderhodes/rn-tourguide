@@ -338,6 +338,9 @@ export class Modal extends React.Component<ModalProps, State> {
       size={this.state.size!}
       position={this.state.position!}
       currentStep={this.props.currentStep}
+      isLastStep={this.props.isLastStep}
+      handleNext={this.handleNext}
+      handleStop={this.handleStop}
       borderRadius={this.props.borderRadius}
     />
   )
