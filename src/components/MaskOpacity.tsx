@@ -25,7 +25,7 @@ export class MaskOpacity extends Component<Props, State> {
       return null
     }
  
-    const { position, size, currentStep, handleNext, isLastStep, handleStop } = this.props
+    const { position, size, currentStep } = this.props
     const shape = currentStep!.shape
 
     const left = position.x
@@ -38,11 +38,6 @@ export class MaskOpacity extends Component<Props, State> {
       <TouchableWithoutFeedback style={style.maskOpacityContainer} onPress={() => {
         if (currentStep.onPress) {
           currentStep.onPress()
-        }
-        if (isLastStep === true && handleStop) {
-          handleStop()
-        } else if (handleNext) {
-          handleNext()
         }
       }}>
         <View style={{ height, width, top, left, borderRadius}} />
