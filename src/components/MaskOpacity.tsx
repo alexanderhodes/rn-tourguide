@@ -28,7 +28,7 @@ export class MaskOpacity extends Component<Props, State> {
     const borderRadius = shape === "circle" ? height / 2 : this.props.borderRadius
 
     return (
-      <TouchableWithoutFeedback style={style.maskOpacityContainer} onPress={() => {}}>
+      <TouchableWithoutFeedback style={style.maskOpacityContainer} onPress={currentStep?.onPress}>
         <View style={{ height, width, top, left, borderRadius}} />
       </TouchableWithoutFeedback>
     )
