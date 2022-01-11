@@ -14,6 +14,7 @@ export interface IStyle {
   bottomBar: ViewStyle
   overlayContainer: ViewStyle
   skipContainer: ViewStyle
+  maskOpacityContainer: ViewStyle
 }
 
 export default StyleSheet.create<IStyle>({
@@ -66,5 +67,8 @@ export default StyleSheet.create<IStyle>({
   skipContainer: {
     position: 'absolute',
     width: "100%",
-  }
+  },
+  maskOpacityContainer: {
+    position: 'absolute',
+  },
 })

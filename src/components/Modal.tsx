@@ -13,7 +13,7 @@ import {
 import { BorderRadiusObject, IStep, Labels, ValueXY } from '../types'
 import styles, { MARGIN } from './style'
 import { SvgMask } from './SvgMask'
-import { SvgOpacity } from './SvgOpacity'
+import { MaskOpacity } from './MaskOpacity'
 import { Tooltip, TooltipProps } from './Tooltip'
 
 declare var __TEST__: boolean
@@ -333,8 +333,8 @@ export class Modal extends React.Component<ModalProps, State> {
     )
   }
 
-  renderMarkedOpacity = () => (
-    <SvgOpacity
+  renderMaskOpacity = () => (
+    <MaskOpacity
       size={this.state.size!}
       position={this.state.position!}
       currentStep={this.props.currentStep}
@@ -363,7 +363,7 @@ export class Modal extends React.Component<ModalProps, State> {
               {this.renderMask()}
               {this.renderTooltip()}
               {this.renderSkipComponent()}
-              {this.renderMarkedOpacity()}
+              {this.renderMaskOpacity()}
             </>
           )}
         </View>
